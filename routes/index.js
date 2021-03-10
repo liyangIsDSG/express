@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const appModel = require('../lib/userModel');
+const appModel = require('../lib/models/userModel');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
