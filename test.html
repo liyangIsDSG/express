@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>upload图片</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <form action="http://localhost:8090/articles/addArticles" method="POST" enctype="multipart/form-data">
+        图片上传 <input name="photoImg" type="file" /> <br />
+        <input name="title" type="text" placeholder="标题"/> <br />
+        <input name="context" type="text" placeholder="内容"/> <br />
+        <input  type="submit" placeholder="提交"></input> <br />
+
+    </form>
+
+    <script>
+        const instance = axios.create({
+            // baseURL: 'https://some-domain.com/api/',
+            method: 'post',
+            timeout: 60000,
+            // headers: { 'X-Custom-Header': 'foobar' },
+            // auth: {
+            //     username: 'janedoe',
+            //     password: 's00pers3cret'
+            // },
+        });
+
+      
+    </script>
+</body>
+
+</html>
