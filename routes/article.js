@@ -13,7 +13,6 @@ router.get('/', (req, res, next) => {
             res.send(article)
         }
     })
-    res.send('成功')
 })
 // 新增文章
 router.post('/addArticles', uploader.single('photoImg'), (req, res) => {
