@@ -20,8 +20,8 @@
 
     <script>
         const instance = axios.create({
-            // baseURL: 'https://some-domain.com/api/',
-            method: 'post',
+            baseURL: 'https://localhost:8090/articles',
+            method: 'get',
             timeout: 60000,
             // headers: { 'X-Custom-Header': 'foobar' },
             // auth: {
@@ -29,6 +29,10 @@
             //     password: 's00pers3cret'
             // },
         });
+        axios.get('http://younglee666.com:8090/articles').then(res => {
+
+            console.log(res)
+        })
 
       
     </script>
