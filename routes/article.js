@@ -38,6 +38,7 @@ router.get('/', (req, res, next) => {
     res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     res.header('Access-Control-Allow-Headers', 'Content-Type');
+
     articleModel.find({}, (err, article) => {
         if (!err) {
             let result = {
@@ -68,13 +69,13 @@ router.post('/addArticles', (req, res) => {
             return
         }
         // console.log(req.body)
-        console.log(req.file)
-        console.log('imgName:', imgName)
+        // console.log(req.file)
+        // console.log('imgName:', imgName)
 
         articleModel.create([{
             title: req.body.title,
             context: req.body.context,
-            imgSrc: 'asdasdasd'
+            imgSrc: imgName
         }], (err, resl) => {
             console.log('插入数据执行之后的回调')
             if (err) {
