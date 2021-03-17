@@ -27,37 +27,48 @@ const upload = multer({
     storage: storage
 }).single('photoImg')
 
-// 获取文章
-router.get('/', (req, res, next) => {
-    // articleModel.create([{
-    //     title: 'giao',
-    //     context: 'giao',
-    //     imgSrc: 'asdasdasd'
-    // }])
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+/**
+ * @auth ly
+ * @desc: 获取文章分页接口
+ * @params page[Number] 、 rows[Number]
+ * @return articles [Array]
+ * @Last Modified: 2021-03-17 15:05:45
+ * @Modified By: ly at <ly18482022657@gmail.com>
+ * */
 
-    articleModel.find({}, (err, article) => {
-        if (!err) {
-            let result = {
-                status: 200,
-                articles: article
-            }
-            res.json(result)
+router.get('/', (req, res, next) => {
+    let query = articleModel.find({});
+    let page = Number(req.query.page);
+    // note: req拿到的 rows 不转Number,mongodb报错 
+    let rows = Number(req.query.rows);
+    let skips = (page - 1) * rows
+    // 当前页显示的数据所有数据-前几页显示的数据
+    query.skip(skips);
+    query.limit(rows)
+    query.exec(function (err, rs) {
+        if (err) {
+            console.log('exec执行失败了')
+            res.send(err);
+        } else {
+            // 计算数据总数
+            articleModel.find(function (err, result) {
+                let jsonArray = {
+                    articles: rs,
+                    total: result.length
+                };
+                res.send(jsonArray);
+            });
+
         }
     })
-
-
 })
 
-// 新增文章
+/***
+ *  @desc 新增文章
+ *  @params title [String] 、 context [String]、 srcImg [String]
+ */
+
 router.post('/addArticles', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
     upload(req, res, function (err) {
         if (err instanceof multer.MulterError) {
             // A Multer error occurred when uploading.

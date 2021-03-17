@@ -13,9 +13,9 @@
 <body>
     <form action="http://younglee666.com:8090/articles/addArticles" method="POST" enctype="multipart/form-data">
         图片上传 <input name="photoImg" type="file" /> <br />
-        <input name="title" type="text" placeholder="标题"/> <br />
-        <input name="context" type="text" placeholder="内容"/> <br />
-        <input  type="submit" placeholder="提交"></input> <br />
+        <input name="title" type="text" placeholder="标题" /> <br />
+        <input name="context" type="text" placeholder="内容" /> <br />
+        <input type="submit" placeholder="提交" id="submitForm"></input> <br />
 
     </form>
 
@@ -30,12 +30,18 @@
             //     password: 's00pers3cret'
             // },
         });
-        axios.get('http://younglee666.com:8090/articles').then(res => {
 
-            console.log(res)
-        })
+        for (let i = 0; i < 20; i++) {
+            let title = `title-${i}`
+            let context = `content-${i}`
+            let photoImg = `photoImg-${i}`
+            axios.post('http://localhost:8090/articles/addArticles', {
+                title,
+                context,
+                photoImg
+            })
 
-      
+        }
     </script>
 </body>
 
