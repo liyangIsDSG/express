@@ -29,19 +29,15 @@
             //     username: 'janedoe',
             //     password: 's00pers3cret'
             // },
+            body: {
+                title: 'test'
+            }
         });
 
-        for (let i = 0; i < 20; i++) {
-            let title = `title-${i}`
-            let context = `content-${i}`
-            let photoImg = `photoImg-${i}`
-            axios.post('http://localhost:8090/articles/addArticles', {
-                title,
-                context,
-                photoImg
-            })
 
-        }
+        instance.get('http://localhost:8090/articles?page=1&rows=10', {
+            title: 'test',
+        })
     </script>
 </body>
 

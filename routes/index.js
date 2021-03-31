@@ -5,7 +5,7 @@ const appModel = require('../lib/models/userModel');
 /* GET home page. */
 router.get('/', function (req, res, next) {
 
-
+  console.log(req)
   appModel.find({}, function (err, user) {
     if (err) {
       console.log('操作失败', err)
@@ -18,16 +18,16 @@ router.get('/', function (req, res, next) {
     console.log(user)
   })
 
-  appModel.create([{
-    name: "zhaorui",
-    pwd: "female",
-  }], err => {
-    if (!err) {
-      console.log("文档插入成功")
-    } else {
-      console.log('插入失败')
-    }
-  })
+  // appModel.create([{
+  //   name: "zhaorui",
+  //   pwd: "female",
+  // }], err => {
+  //   if (!err) {
+  //     console.log("文档插入成功")
+  //   } else {
+  //     console.log('插入失败')
+  //   }
+  // })
 
 
   // res.send('Hello World')

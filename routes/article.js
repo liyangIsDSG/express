@@ -37,6 +37,7 @@ const upload = multer({
  * */
 
 router.get('/', (req, res, next) => {
+    console.log(req.body)
     let query = articleModel.find({});
     let page = Number(req.query.page);
     // note: req拿到的 rows 不转Number,mongodb报错 
