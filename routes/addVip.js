@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const vipModel = require('../lib/models/vipModel')
 
+// 获取会员列表
 router.get('/getVipList', (req, res, next) => {
     console.log(req.body)
     let query = vipModel.find({});
@@ -29,14 +30,14 @@ router.get('/getVipList', (req, res, next) => {
         }
     })
 })
-
+// 新增会员
 router.post('/addVip', (req, res) => {
-        
-        console.log(req.body.name,req.body.tel,req.body.integral)
         vipModel.create([{
             name: req.body.name,
             tel: req.body.tel,
-            integral: req.body.integral
+            integral: req.body.integral,
+            date: req.body.date,
+            isremove:false,
         }], (err, resl) => {
             console.log('插入数据执行之后的回调')
             if (err) {
@@ -46,6 +47,21 @@ router.post('/addVip', (req, res) => {
         })
 
         // Everything went fine.
+
+})
+
+// 修改会员信息
+router.post('/modifyVipInfo',(req,res) => {
+    console.log(req.body._id)
+    vipModel.findOne({ "_id":req.body._id },'integral', function (err, vipInfo) {
+        console.log(vipInfo)
+        if (err) {
+            console.log('出错了')
+            return
+        };
+        console.log(vipInfo)
+      });
+      res.send('ok')
 
 })
 module.exports = router
