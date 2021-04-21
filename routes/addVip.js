@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var fs=require("fs");
+
 const vipModel = require('../lib/models/vipModel')
 
 // 获取会员列表
@@ -67,4 +69,20 @@ router.post('/modifyVipInfo', async (req, res) => {
     });
 
 })
+
+// 下载接口
+
+router.get('/download.do', function (req, res, next) {
+    var name = 'liyang.txt';
+    var path = './' + name;
+    var size = fs.statSync(path).size;
+    var f = fs.createReadStream(path);
+    res.writeHead(200, {
+      'Content-Type': 'application/force-download',
+      'Content-Disposition': 'attachment; filename=' + name,
+      'Content-Length': size
+    });
+    f.pipe(res);
+})
+ 
 module.exports = router
