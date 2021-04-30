@@ -11,7 +11,7 @@ router.get('/getVipList', (req, res, next) => {
     let page = Number(req.query.page);
     // note: req拿到的 rows 不转 Number,mongodb报错 
     let rows = Number(req.query.rows) || 10;
-    let skips = (page - 1) * rows || 1
+    let skips = (page - 1) * rows || 0
     // 当前页显示的数据所有数据-前几页显示的数据
     query.skip(skips);
     query.limit(rows)
